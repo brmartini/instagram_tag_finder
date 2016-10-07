@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+
+		<title>Instagram TAG</title>
+		
+		<!-- bootstrap - link cdn -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	
+		<!-- estilo -->
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+
+	<body>
+
+		<div class="container">
+            <div class="row vertical-offset-80">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="panel panel-default">
+                    	<div class="panel-heading">                                
+                            <div class="row-fluid user-row">
+                                <img src="images/tag_finder.png" class="img-responsive" alt="Multiroom Chat"/>
+                            </div>
+                        </div>
+                        <div class="panel-body" id="painel">
+                            <form  action="/pesquisar" method="post"> 
+                                
+                                    <label class="panel-login">
+                                    <div class="login_result"></div>
+                                    </label>
+                                    <input class="form-control" placeholder="hashtag" id="tag" name="tag" type="text">
+                                    <br></br>
+                                    <input class="btn btn-lg btn-success btn-block" type="submit" id="procurar" value="Pesquisar tag »">                                    
+                                    </form><br />
+                                    <form action="listar" method="post">
+                                      <input class="btn btn-lg btn-success btn-block" type="submit" id="listar" value="Listar tags Salvas »">                                       
+                                    </form>
+
+                                    <br />
+
+                                    <% if(validacao.length > 0) { %>
+
+                                         <div class="alert alert-danger">
+
+                                        <strong>ATENCAO!</strong>
+                                            <ul>                                            
+                                                <li><%= validacao[0].msg %></li>
+                                            
+                                            </ul>
+                                            
+                                        </div>
+
+
+                                    <% } %>
+                                    
+
+                                    
+                                    <%if(hashtag.length > 0) { %>
+                                    <div>                                        
+                                    
+                                    <ul class="list-group" >
+                                        <form action="/salvar" method="post" >
+                                        <input  type="hidden" value="<%=hashtag[0].name%>" id="salvatag" name="tagname" >       
+                                        <li class=" list-group"> #<%=hashtag[0].name%>  <input class="btn btn-sm btn-success" type="submit" value="salvar">                                    
+                                        </li>
+                                        </form>
+                                        
+
+                                    </ul>
+
+                                    </div>
+
+                                    <% } %>
+
+
+                                    <%if(hashtaglist.length > 0) { %>
+                                    <div>                                        
+                                    
+                                    <ul class="list-group" >
+
+                                    <% for( var i = 0 ; i < hashtaglist.length ; i++){ %>
+                                        <form action="/remover" method="post" >
+                                        <input  type="hidden" value="<%=hashtaglist[i].tagname%>" id="tag" name="tagname" >       
+                                        <li class=" list-group"  ><a href="https://www.instagram.com/explore/tags/<%=hashtaglist[i].tagname%>/"><%=hashtaglist[i].tagname%> </a> <input class="btn btn-sm btn-danger" type="submit" value="remover">                                    
+                                        </li>
+                                        </form>
+                                    <% } %>
+                                        
+
+                                    </ul>
+
+                                    </div>
+
+                                    <% } %>
+                                        
+                                    
+
+                                    
+
+                                    
+                                
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+		
+	</body>
+</html>
